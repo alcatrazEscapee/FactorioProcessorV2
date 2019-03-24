@@ -1,0 +1,41 @@
+/**
+ * Gradle Build Script for Factorio Assembler
+ */
+
+plugins {
+    // Basic Plugins for Java and Intellij
+    id 'java'
+    id 'idea'
+    id 'application'
+
+    // This makes the build task include the implementation dependencies (GSON)
+    id "com.github.johnrengelman.shadow" version "4.0.4"
+}
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+dependencies {
+    // Use JUnit 5.3.1 test framework
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
+    // Jetbrains annotations
+    implementation 'org.jetbrains:annotations:16.0.2'
+}
+
+// Define the main class for the application
+mainClassName = 'assembler.AssemblerInterface'
+
+// Task Configuration
+jar {
+    // Makes the jar actually run from java -jar
+    manifest { attributes('Main-Class': mainClassName) }
+}
+
+test {
+    useJUnitPlatform()
+}

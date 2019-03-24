@@ -1,0 +1,2274 @@
+{
+  "blueprint": {
+    "icons": [
+      {
+        "signal": {
+          "type": "item",
+          "name": "constant-combinator"
+        },
+        "index": 1
+      }
+    ],
+    "entities": [
+      {
+        "entity_number": 1,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -33
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_0",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_1",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_2",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_3",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_4",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_5",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_6",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_7",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_8",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_9",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_10",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_11",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_12",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_13",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_14",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_15",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 2,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -29
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_16",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_17",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_18",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_19",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_20",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_21",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_22",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_23",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_24",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_25",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_26",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_27",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_28",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_29",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_30",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_31",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 3,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -25
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_32",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_33",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_34",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_35",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_36",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_37",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_38",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_39",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_40",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_41",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_42",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_43",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_44",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_45",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_46",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_47",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 4,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -21
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_48",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_49",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_50",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_51",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_52",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_53",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_54",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_55",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_56",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_57",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_58",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_59",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_60",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_61",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_62",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_63",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 5,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -15
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_64",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_65",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_66",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_67",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_68",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_69",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_70",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_71",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_72",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_73",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_74",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_75",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_76",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_77",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_78",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_79",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 6,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -11
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_80",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_81",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_82",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_83",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_84",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_85",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_86",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_87",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_88",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_89",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_90",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_91",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_92",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_93",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_94",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_95",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 7,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -7
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_96",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_97",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_98",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_99",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_100",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_101",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_102",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_103",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_104",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_105",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_106",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_107",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_108",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_109",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_110",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_111",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 8,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": -3
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_112",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_113",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_114",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_115",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_116",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_117",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_118",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_119",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_120",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_121",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_122",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_123",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_124",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_125",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_126",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_127",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 9,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 3
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_128",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_129",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_130",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_131",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_132",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_133",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_134",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_135",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_136",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_137",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_138",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_139",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_140",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_141",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_142",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_143",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 10,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 7
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_144",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_145",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_146",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_147",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_148",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_149",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_150",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_151",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_152",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_153",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_154",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_155",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_156",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_157",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_158",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_159",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 11,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 11
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_160",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_161",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_162",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_163",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_164",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_165",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_166",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_167",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_168",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_169",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_170",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_171",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_172",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_173",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_174",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_175",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 12,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 15
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_176",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_177",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_178",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_179",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_180",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_181",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_182",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_183",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_184",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_185",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_186",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_187",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_188",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_189",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_190",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_191",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 13,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 21
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_192",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_193",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_194",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_195",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_196",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_197",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_198",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_199",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_200",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_201",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_202",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_203",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_204",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_205",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_206",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_207",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 14,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 25
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_208",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_209",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_210",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_211",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_212",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_213",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_214",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_215",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_216",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_217",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_218",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_219",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_220",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_221",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_222",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_223",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 15,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 29
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_224",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_225",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_226",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_227",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_228",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_229",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_230",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_231",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_232",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_233",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_234",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_235",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_236",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_237",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_238",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_239",
+              "index": 16
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 16,
+        "name": "constant-combinator",
+        "position": {
+          "x": 0,
+          "y": 33
+        },
+        "direction": 4,
+        "control_behavior": {
+          "filters": [
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-0"
+              },
+              "count": "MEMORY_VALUE_240",
+              "index": 1
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-1"
+              },
+              "count": "MEMORY_VALUE_241",
+              "index": 2
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-2"
+              },
+              "count": "MEMORY_VALUE_242",
+              "index": 3
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-3"
+              },
+              "count": "MEMORY_VALUE_243",
+              "index": 4
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-4"
+              },
+              "count": "MEMORY_VALUE_244",
+              "index": 5
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-5"
+              },
+              "count": "MEMORY_VALUE_245",
+              "index": 6
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-6"
+              },
+              "count": "MEMORY_VALUE_246",
+              "index": 7
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-7"
+              },
+              "count": "MEMORY_VALUE_247",
+              "index": 8
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-8"
+              },
+              "count": "MEMORY_VALUE_248",
+              "index": 9
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-9"
+              },
+              "count": "MEMORY_VALUE_249",
+              "index": 10
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-A"
+              },
+              "count": "MEMORY_VALUE_250",
+              "index": 11
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-B"
+              },
+              "count": "MEMORY_VALUE_251",
+              "index": 12
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-C"
+              },
+              "count": "MEMORY_VALUE_252",
+              "index": 13
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-D"
+              },
+              "count": "MEMORY_VALUE_253",
+              "index": 14
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-E"
+              },
+              "count": "MEMORY_VALUE_254",
+              "index": 15
+            },
+            {
+              "signal": {
+                "type": "virtual",
+                "name": "signal-F"
+              },
+              "count": "MEMORY_VALUE_255",
+              "index": 16
+            }
+          ]
+        }
+      }
+    ],
+    "item": "blueprint",
+    "label": "256B-ROM: PROGRAM_NAME",
+    "version": 68722819072
+  }
+}
