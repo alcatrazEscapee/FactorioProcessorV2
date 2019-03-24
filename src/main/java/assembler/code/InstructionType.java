@@ -26,7 +26,7 @@ public enum InstructionType
     AND("and", 0b1100001, 9, 2),
     OR("or", 0b1110001, 10, 2),
     XOR("xor", 0b0000010, 11, 2),
-    XAND("xand", 0b0010010, 12, 2),
+    XNOR("xnor", 0b0010010, 12, 2),
     LEFT_SHIFT("ls", 0b0100010, 13, 2),
     RIGHT_SHIFT("rs", 0b0110010, 14, 2),
     LEFT_ROTATE("lr", 0b1000010, 15, 2),
