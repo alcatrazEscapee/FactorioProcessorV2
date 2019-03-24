@@ -1,4 +1,8 @@
-# Factorio Computer V2 Specifications
+# Factorio Assembly Compiler / Processor
+
+This is a repository for a processor I built in Factorio. It is a 3.75 Hz*, 16-Bit RISC Style Processor with 512 Byte ROM, 128 Byte RAM, and a 16-Bit ASCII Character Display. Map download, compiler, example programs and supporting documentation can all be found here.
+
+\* I have gotten it to run at up to 120 Hz with `/c game.speed=32`
 
 
 ### Contents
@@ -120,39 +124,39 @@ Extra Info:
 
 2.1 Instruction Table
 
-OPCODE      | NAME      | FIELDS        | ID    | Type
-------------|-----------|---------------|-------|-------
-0 0000      | call      | IMM           | 1     | 1
-1 0000      | return    | n/a           | 2     | 1
-000 0001    | add       | rX, rY, rZ    | 3     | 2
-001 0001    | sub       | rX, rY, rZ    | 4     | 2
-010 0001    | mul       | rX, rY, rZ    | 5     | 2
-011 0001    | div       | rX, rY, rZ    | 6     | 2
-100 0001    | pow       | rX, rY, rZ    | 7     | 2
-101 0001    | modulo    | rX, rY, rZ    | 8     | 2
-110 0001    | and       | rX, rY, rZ    | 9     | 2
-111 0001    | or        | rX, rY, rZ    | 10    | 2
-000 0010    | xor       | rX, rY, rZ    | 11    | 2
-001 0010    | xnor      | rX, rY, rZ    | 12    | 2
-010 0010    | lshift    | rX, rY, rZ    | 13    | 2
-011 0010    | rshift    | rX, rY, rZ    | 14    | 2
-100 0010    | lroll     | rX, rY, rZ    | 15    | 2
-101 0010    | rroll     | rX, rY, rZ    | 16    | 2
-110 0010    |           |               | 17    |
-111 0010    |           |               | 18    |
-0011        | store     | rX, IMM(rY)   | 19    | 3
-0100        | load      | rX, IMM(rY)   | 20    | 3
-0101        | brequal   | rX, rY, IMM   | 21    | 4
-0110        | brnotequal| rX, rY, IMM   | 22    | 4
-0111        | brgreater | rX, rY, IMM   | 23    | 4
-1000        | brless    | rX, rY, IMM   | 24    | 4
-1001        | addi      | rX, rY, IMM   | 25    | 5
-1010        | muli      | rX, rY, IMM   | 26    | 5
-1011        | divi      | rX, rY, IMM   | 27    | 5
-1100        | andi      | rX, rY, IMM   | 28    | 6
-1101        | ori       | rX, rY, IMM   | 29    | 6
-1110        | lshifti   | rX, rY, IMM   | 30    | 6
-1111        | rshifti   | rX, rY, IMM   | 31    | 6
+Opcode      | Name                | Assembly  | Fields        | ID    | Type
+------------|---------------------|-----------|---------------|-------|-------
+0 0000      |Call                 | call      | IMM           | 1     | 1
+1 0000      |Return               | ret       | n/a           | 2     | 1
+000 0001    |Add                  | add       | rX, rY, rZ    | 3     | 2
+001 0001    |Subtract             | sub       | rX, rY, rZ    | 4     | 2
+010 0001    |Multiply             | mul       | rX, rY, rZ    | 5     | 2
+011 0001    |Divide               | div       | rX, rY, rZ    | 6     | 2
+100 0001    |Power                | pow       | rX, rY, rZ    | 7     | 2
+101 0001    |Modulo               | mod       | rX, rY, rZ    | 8     | 2
+110 0001    |Bitwise AND          | and       | rX, rY, rZ    | 9     | 2
+111 0001    |Bitwise OR           | or        | rX, rY, rZ    | 10    | 2
+000 0010    |Bitwise XOR          | xor       | rX, rY, rZ    | 11    | 2
+001 0010    |Bitwise XNOR         | xnor      | rX, rY, rZ    | 12    | 2
+010 0010    |Left Shift           | ls        | rX, rY, rZ    | 13    | 2
+011 0010    |Right Shift          | rs        | rX, rY, rZ    | 14    | 2
+100 0010    |Left Rotate          | lr        | rX, rY, rZ    | 15    | 2
+101 0010    |Right Rotate         | rr        | rX, rY, rZ    | 16    | 2
+110 0010    |                     |           |               | 17    |
+111 0010    |                     |           |               | 18    |
+0011        |Memory Store         | stw       | rX, IMM(rY)   | 19    | 3
+0100        |Memory Load          | ldw       | rX, IMM(rY)   | 20    | 3
+0101        |Break If Equal       | beq       | rX, rY, IMM   | 21    | 4
+0110        |Break If Not Equal   | bne       | rX, rY, IMM   | 22    | 4
+0111        |Break If Greater     | bgt       | rX, rY, IMM   | 23    | 4
+1000        |Break If Less        | blt       | rX, rY, IMM   | 24    | 4
+1001        |Add Immediate        | addi      | rX, rY, IMM   | 25    | 5
+1010        |Multiply Immediate   | muli      | rX, rY, IMM   | 26    | 5
+1011        |Divide Immediate     | divi      | rX, rY, IMM   | 27    | 5
+1100        |AND Immediate        | andi      | rX, rY, IMM   | 28    | 6
+1101        |OR Immediate         | ori       | rX, rY, IMM   | 29    | 6
+1110        |Left Shift Immediate | lsi       | rX, rY, IMM   | 30    | 6
+1111        |Right Shift Immediate| rsi       | rX, rY, IMM   | 31    | 6
 
 
 2.2: Assembler / Compiler Pseudo-Instructions:
