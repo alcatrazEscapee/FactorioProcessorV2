@@ -120,6 +120,8 @@ Extra Info:
 2.1 Instruction Table
 
  - Note that most of these instructions are very similar if not identical in assembly usage to the Nios-II DE0 instruction set, which I used as a template and inspiration for this instruction set. (Although the implementation of the instruction set and the overall processor is quite different.)
+ - All immediate values (denoted with IMM, 6b-IMM, or 12b-IMM) represent immediate values. The exception is the `movia` pseudoinstruction, which can take a label or a 12 bit signed immediate value (range \[-1024, 1023])
+ - Arithmetic instructions (such as add, subtract, power, etc.) will sign-extend their arguments, so the range of the 6-bit immediate is \[-32, 31]. Logical instructions (such as and, or, xor, etc.) will zero-extend their arguments, so the range of the 6-bit immediate is \[0, 63]
 
 Opcode      | Name                 | Assembly  | Fields        | ID    | Type
 ------------|----------------------|-----------|---------------|-------|-------
@@ -143,10 +145,10 @@ Opcode      | Name                 | Assembly  | Fields        | ID    | Type
 111 0010    |                      |           |               | 18    |
 0011        | Memory Store         | stw       | rX, IMM(rY)   | 19    | 3
 0100        | Memory Load          | ldw       | rX, IMM(rY)   | 20    | 3
-0101        | Break If Equal       | beq       | rX, rY, IMM   | 21    | 4
-0110        | Break If Not Equal   | bne       | rX, rY, IMM   | 22    | 4
-0111        | Break If Greater     | bgt       | rX, rY, IMM   | 23    | 4
-1000        | Break If Less        | blt       | rX, rY, IMM   | 24    | 4
+0101        | Break If Equal       | beq       | rX, rY, LABEL | 21    | 4
+0110        | Break If Not Equal   | bne       | rX, rY, LABEL | 22    | 4
+0111        | Break If Greater     | bgt       | rX, rY, LABEL | 23    | 4
+1000        | Break If Less        | blt       | rX, rY, LABEL | 24    | 4
 1001        | Add Immediate        | addi      | rX, rY, IMM   | 25    | 5
 1010        | Multiply Immediate   | muli      | rX, rY, IMM   | 26    | 5
 1011        | Divide Immediate     | divi      | rX, rY, IMM   | 27    | 5
@@ -161,17 +163,16 @@ Opcode      | Name                 | Assembly  | Fields        | ID    | Type
 Name                       | Assembly | Fields        | Actual Implementation
 ---------------------------|----------|---------------|-------------------------
 Move                       | mov      | rX, rY        | add rX, r0, rY
-Move Immediate             | movi     | rX, IMM       | addi rX, r0, IMM
-Move Address               | movia    | rX, IMM       | ori rX, r0, IMM\[11-6] / lshifti rX, rX, 6 / ori rX, rX, IMM\[5-0]
-Subtract Immediate         | subi     | rX, rY, IMM   | addi rX, rY, -IMM
-Break If Greater or Equal  | bge      | rX, rY, IMM   | blt rY, rX, IMM
-Break If Less or Equal     | ble      | rX, rY, IMM   | bgt rY, rX, IMM
-Break If Zero              | brz      | rX, IMM       | beq rX, r0, IMM
-Break If Not Zero          | bnz      | rX, IMM       | bne rX, r0, IMM
+Move Immediate             | movi     | rX, 6b-IMM    | addi rX, r0, IMM
+Move Immediate Unsigned    | moviu    | rX, 6b-IMM    | ori rX, r0, IMM
+Move Address               | movia    | rX, 12b-IMM   | ori rX, r0, IMM\[11-6] / lshifti rX, rX, 6 / ori rX, rX, IMM\[5-0]
+Subtract Immediate         | subi     | rX, rY, 6b-IMM| addi rX, rY, -IMM
+Break If Greater or Equal  | bge      | rX, rY, LABEL | blt rY, rX, LABEL
+Break If Less or Equal     | ble      | rX, rY, LABEL | bgt rY, rX, LABEL
+Break If Zero              | brz      | rX, LABEL     | beq rX, r0, LABEL
+Break If Not Zero          | bnz      | rX, LABEL     | bne rX, r0, LABEL
 
 \* The `exit` instruction shares an opcode with `return`. It is given by the encoding 1000000000010000. This instruction will stop the processor's clock and terminate program execution. 
-
-** The Move Address instruction can take an argument which represents either a 12-bit immediate value, or a label (such as one on a .asciz compiler argument)
 
 Additionally, the compiler will recognize directives that start with a `.`:
 

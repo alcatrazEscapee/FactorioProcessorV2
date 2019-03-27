@@ -21,7 +21,7 @@ public class Instruction implements IInstruction
     private String symbol;
     private IntUnaryOperator symbolOperator;
 
-    public Instruction(@NotNull InstructionType type, int line, String text, @NotNull String[] args) throws InvalidAssemblyException
+    Instruction(@NotNull InstructionType type, int line, String text, @NotNull String[] args) throws InvalidAssemblyException
     {
         this.line = line;
         this.type = type;
@@ -160,6 +160,10 @@ public class Instruction implements IInstruction
         if ("ra".equals(arg))
         {
             return 1;
+        }
+        if ("sp".equals(arg))
+        {
+            return 7;
         }
         int result = Integer.parseInt(arg.substring(1));
         if (result < 0 || result > 7)
