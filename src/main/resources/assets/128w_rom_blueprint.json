@@ -1147,7 +1147,7 @@
       }
     ],
     "item": "blueprint",
-    "label": "128B-ROM: PROGRAM_NAME",
+    "label": "256B-ROM: PROGRAM_NAME",
     "version": 68722819072
   }
 }

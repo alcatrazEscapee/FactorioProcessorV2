@@ -1,7 +1,7 @@
 package assembler;
 
-import assembler.code.Assembly;
-import assembler.code.IInstruction;
+import assembler.asm.Assembly;
+import assembler.asm.IInstruction;
 import assembler.util.Helpers;
 import assembler.util.InvalidAssemblyException;
 import org.jetbrains.annotations.TestOnly;
@@ -28,13 +28,22 @@ class FactorioAssemblerTest
     @Test
     void testHelloWorld()
     {
+        // Prints 'Hello World' to the display
         test("assets/test_hello_world.s", 16473, 18542, 33065, 28676, 26627, 36889, 18457, 28676, 25526, 18489, 36889, 28676, 26627, 36889, 18457, 28676, 25526, 32784, 72, 69, 76, 76, 79, 0, 87, 79, 82, 76, 68, 33, 0);
     }
 
     @Test
     void testClearDisplay()
     {
+        // Clears the output display
         test("assets/test_clear_display.s", 16473, 18542, 41225, 2051, 47097, 18457, 41927, 32784);
+    }
+
+    @Test
+    void testHelloWorldSubroutine()
+    {
+        // Prints 'Hello World' to the display, using a modular subroutine asm style
+        test("assets/test_hello_world_subroutine.s", 58365, 64622, 64589, 16925, 18542, 18445, 24585, 192, 17021, 18542, 18445, 24585, 32, 32784, 65497, 23555, 31763, 39971, 32781, 36974, 36957, 28161, 34820, 35843, 18457, 27673, 34820, 33718, 23556, 31764, 39972, 64569, 16, 72, 69, 76, 76, 79, 0, 87, 79, 82, 76, 68, 0);
     }
 
     @TestOnly

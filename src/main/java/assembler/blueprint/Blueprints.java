@@ -14,8 +14,8 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import assembler.code.Assembly;
-import assembler.code.IInstruction;
+import assembler.asm.Assembly;
+import assembler.asm.IInstruction;
 import assembler.util.Helpers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +31,7 @@ public class Blueprints
     }
 
     @Nullable
+    @SuppressWarnings("unused")
     public static String decode(@NotNull String input)
     {
         byte[] bytes = Base64.getDecoder().decode(input.substring(1));

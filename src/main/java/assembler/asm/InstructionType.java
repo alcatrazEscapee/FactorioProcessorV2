@@ -4,7 +4,7 @@
  * See the project LICENCE.md for more information
  */
 
-package assembler.code;
+package assembler.asm;
 
 import java.util.HashMap;
 import java.util.Set;

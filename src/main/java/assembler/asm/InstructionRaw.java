@@ -4,26 +4,18 @@
  * See the project LICENCE.md for more information
  */
 
-package assembler.code;
+package assembler.asm;
 
-public class InstructionData implements IInstruction
+public class InstructionRaw implements IInstruction
 {
-    public static InstructionData exit()
-    {
-        return new InstructionData(0b1000000000010000, "exit");
-    }
-
     private final int data;
+    private final int line;
     private final String name;
 
-    InstructionData(int data)
-    {
-        this(data, "asciz data");
-    }
-
-    private InstructionData(int data, String name)
+    public InstructionRaw(int data, int line, String name)
     {
         this.data = data;
+        this.line = line;
         this.name = name;
     }
 
@@ -34,8 +26,14 @@ public class InstructionData implements IInstruction
     }
 
     @Override
+    public int getLine()
+    {
+        return line;
+    }
+
+    @Override
     public String toString()
     {
-        return name;
+        return "[" + name + "]";
     }
 }
