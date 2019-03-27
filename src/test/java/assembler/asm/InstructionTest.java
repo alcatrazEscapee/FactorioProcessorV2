@@ -37,19 +37,27 @@ class InstructionTest
     }
 
     @Test
-    void testFails() throws Exception
+    void testFails()
     {
+        // Syntax Errors
         assertThrows(AssertionFailedError.class, () -> parse("apd", " r2, r3, r4"));
         assertThrows(NumberFormatException.class, () -> parse("add", " rx, r1, ra"));
         assertThrows(NumberFormatException.class, () -> parse("add", " r2 r3, r4"));
         assertThrows(InvalidAssemblyException.class, () -> parse("add", " r9, r3, r4"));
         assertThrows(InvalidAssemblyException.class, () -> parse("add", " r-1, r3, r4"));
 
+        // Incorrect addressing mode
         assertThrows(IndexOutOfBoundsException.class, () -> parse("stw", "r1, r2, 6"));
+
+        // Immediate not in range
+        assertThrows(InvalidAssemblyException.class, () -> parse("addi", " r1, r2, 32"));
+        assertThrows(InvalidAssemblyException.class, () -> parse("muli", " r1, r2, -33"));
+        assertThrows(InvalidAssemblyException.class, () -> parse("ori", " r1, r2, -1"));
+        assertThrows(InvalidAssemblyException.class, () -> parse("andi", " r1, r2, 64"));
     }
 
     @TestOnly
-    private String parse(String key, String input) throws Exception
+    private String parse(String key, String input) throws InvalidAssemblyException
     {
         InstructionType type = InstructionType.get(key);
         if (type == null)

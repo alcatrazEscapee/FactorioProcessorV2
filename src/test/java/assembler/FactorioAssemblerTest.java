@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class FactorioAssemblerTest
 {
     @Test
-    void build1()
+    void test1()
     {
         // Basic arithmetic instructions
         test("assets/test1.s", 16425, 24633, 35201, 37034, 36907, 43393, 53937, 63937, 65529);
     }
 
     @Test
-    void build2()
+    void test2()
     {
         // conditional branching
         test("assets/test2.s", 24665, 18457, 20456, 19449, 20455, 32784);
@@ -43,7 +43,7 @@ class FactorioAssemblerTest
     void testHelloWorldSubroutine()
     {
         // Prints 'Hello World' to the display, using a modular subroutine asm style
-        test("assets/test_hello_world_subroutine.s", 58365, 64622, 64589, 16925, 18542, 18445, 24585, 192, 17021, 18542, 18445, 24585, 32, 32784, 65497, 23555, 31763, 39971, 32781, 36974, 36957, 28161, 34820, 35843, 18457, 27673, 34820, 33718, 23556, 31764, 39972, 64569, 16, 72, 69, 76, 76, 79, 0, 87, 79, 82, 76, 68, 0);
+        test("assets/test_hello_world_subroutine.s", 57421, 64622, 65533, 16397, 18542, 18973, 24585, 192, 16397, 18542, 19069, 24713, 32, 32784, 65497, 23555, 31763, 39971, 32861, 36974, 36877, 28161, 34820, 35843, 18457, 27673, 34820, 33718, 23556, 31764, 39972, 64569, 16, 72, 69, 76, 76, 79, 0, 87, 79, 82, 76, 68, 0);
     }
 
     @TestOnly
@@ -52,7 +52,7 @@ class FactorioAssemblerTest
         String data = Helpers.loadResource(fileName);
         try
         {
-            Assembly asm = FactorioAssembler.INSTANCE.build("test", data);
+            Assembly asm = FactorioAssembler.build("test", data);
             assertEquals(expectedBytes.length, asm.size());
             assertArrayEquals(expectedBytes, asm.getInstructions().stream().mapToInt(IInstruction::getEncoded).toArray());
 

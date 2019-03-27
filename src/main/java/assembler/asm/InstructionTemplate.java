@@ -17,6 +17,7 @@ public enum InstructionTemplate
 {
     MOV("mov"),
     MOVI("movi"),
+    MOVI_UNSIGNED("moviu"),
     MOVI_LONG("movia"),
     SUBI("subi"),
     BREAK_GREATER_EQUAL("bge"),
@@ -65,6 +66,8 @@ public enum InstructionTemplate
                 return List.of("add " + args[0] + ",r0," + args[1]);
             case MOVI:
                 return List.of("addi " + args[0] + ",r0," + args[1]);
+            case MOVI_UNSIGNED:
+                return List.of("ori " + args[0] + ",r0," + args[1]);
             case MOVI_LONG:
                 try
                 {
