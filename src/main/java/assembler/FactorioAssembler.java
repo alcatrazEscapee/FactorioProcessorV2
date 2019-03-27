@@ -8,20 +8,22 @@ package assembler;
 
 import java.util.List;
 
+import assembler.asm.Assembly;
+import assembler.asm.InstructionTemplate;
+import assembler.asm.InstructionType;
 import assembler.blueprint.Blueprints;
-import assembler.code.Assembly;
-import assembler.code.InstructionData;
-import assembler.code.InstructionTemplate;
-import assembler.code.InstructionType;
 import assembler.util.Helpers;
 import assembler.util.InvalidAssemblyException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public enum FactorioAssembler
+/**
+ * Main class and CLI for the compiler / assembler
+ *
+ * @author Alex O'Neill
+ */
+public final class FactorioAssembler
 {
-    INSTANCE;
-
     public static void main(String... args)
     {
         if (args.length == 0)
@@ -94,15 +96,17 @@ public enum FactorioAssembler
             return;
         }
 
+        System.out.printf("Compiling with arguments: [%s]\n", String.join(" ", args));
         Assembly asm;
         try
         {
-            asm = INSTANCE.build(name, input);
+            asm = build(name, input);
         }
         catch (InvalidAssemblyException e)
         {
             System.out.println("Error compiling the assembly: ");
             e.printStackTrace();
+            e.printData();
             return;
         }
         catch (Exception e)
@@ -114,39 +118,31 @@ public enum FactorioAssembler
 
         if (debug)
         {
-            System.out.println("Debug Data:");
-            asm.getInstructions().forEach(x -> System.out.printf("%16s | %5d | %12s\n", x.getEncodedString(), x.getEncoded(), x.toString()));
+            System.out.println(asm);
         }
 
         if (blueprint)
         {
             String blueprintString = Blueprints.encode(asm);
-            System.out.println("Blueprint:");
+            System.out.println("Blueprint String:");
             System.out.println(blueprintString);
         }
     }
 
     @NotNull
-    public Assembly build(@NotNull String name, @NotNull String input) throws InvalidAssemblyException
+    public static Assembly build(@NotNull String name, @NotNull String input) throws InvalidAssemblyException
     {
         Assembly assembly = new Assembly(name);
-        try
-        {
-            List<String> inputLines = Helpers.getLinesUnformatted(input);
+        List<String> inputLines = Helpers.getLinesUnformatted(input);
 
-            while (inputLines.size() > 0)
-            {
-                String line = inputLines.remove(0);
-                List<String> results = compileLine(assembly, line);
-                if (results != null)
-                {
-                    inputLines.addAll(0, results);
-                }
-            }
-        }
-        catch (Exception e)
+        while (inputLines.size() > 0)
         {
-            throw new InvalidAssemblyException("Unknown Exception Type Thrown", e);
+            String line = inputLines.remove(0);
+            List<String> results = compileLine(assembly, line);
+            if (results != null)
+            {
+                inputLines.addAll(0, results);
+            }
         }
 
         assembly.applyLinker();
@@ -154,57 +150,71 @@ public enum FactorioAssembler
     }
 
     @Nullable
-    private List<String> compileLine(Assembly assembly, String line) throws InvalidAssemblyException
+    private static List<String> compileLine(Assembly assembly, String line) throws InvalidAssemblyException
     {
-        StringBuilder inputBuilder = new StringBuilder(line);
-        StringBuilder keywordBuilder = new StringBuilder();
-
-        while (inputBuilder.length() > 0)
+        try
         {
-            // Pop a character into the keyword buffer
-            Helpers.nextChar(keywordBuilder, inputBuilder);
-            String keyword = keywordBuilder.toString();
-            String[] args = inputBuilder.toString().replaceAll(" ", "").split(",");
+            StringBuilder inputBuilder = new StringBuilder(line);
+            StringBuilder keywordBuilder = new StringBuilder();
 
-            if ("exit".equals(keyword))
+            while (inputBuilder.length() > 0)
             {
-                assembly.addInstruction(InstructionData.exit());
-                return null;
-            }
+                // Pop a character into the keyword buffer
+                Helpers.nextChar(keywordBuilder, inputBuilder);
+                String keyword = keywordBuilder.toString();
+                String[] args = inputBuilder.toString().replaceAll(" ", "").split(",");
 
-            if (inputBuilder.length() > 0)
-            {
-                if (InstructionType.keys().contains(keyword) && inputBuilder.charAt(0) == ' ')
+                if ("exit".equals(keyword))
                 {
-                    // basic instruction
-                    assembly.addInstruction(keyword, args);
+                    assembly.addExit();
                     return null;
                 }
-                else if (InstructionTemplate.keys().contains(keyword) && inputBuilder.charAt(0) == ' ')
+
+                if (inputBuilder.length() > 0)
                 {
-                    // template instruction
-                    return InstructionTemplate.get(keyword).convert(args);
-                }
-                else if (".asciz".equals(keyword) && inputBuilder.charAt(0) == ' ')
-                {
-                    inputBuilder.deleteCharAt(0);
-                    assembly.addData(inputBuilder.toString().toUpperCase());
-                    return null;
-                }
-                else if (inputBuilder.charAt(0) == ':')
-                {
-                    // labels
-                    assembly.addLabel(keyword);
-                    inputBuilder.deleteCharAt(0);
-                    keywordBuilder = new StringBuilder();
+                    if (InstructionType.keys().contains(keyword) && inputBuilder.charAt(0) == ' ')
+                    {
+                        // basic instruction
+                        assembly.addInstruction(keyword, keyword + inputBuilder, args);
+                        return null;
+                    }
+                    else if (InstructionTemplate.keys().contains(keyword) && inputBuilder.charAt(0) == ' ')
+                    {
+                        // template instruction
+                        return InstructionTemplate.get(keyword).convert(args);
+                    }
+                    else if (".asciz".equals(keyword) && inputBuilder.charAt(0) == ' ')
+                    {
+                        inputBuilder.deleteCharAt(0);
+                        assembly.addData(inputBuilder.toString().toUpperCase());
+                        return null;
+                    }
+                    else if (inputBuilder.charAt(0) == ':')
+                    {
+                        // labels
+                        assembly.addLabel(keyword);
+                        inputBuilder.deleteCharAt(0);
+                        keywordBuilder = new StringBuilder();
+                    }
                 }
             }
-        }
 
-        if (keywordBuilder.length() > 0)
-        {
-            System.out.println("Unable to parse: " + keywordBuilder);
+            if (keywordBuilder.length() > 0)
+            {
+                System.out.println("Unable to parse: " + keywordBuilder);
+            }
+            return null;
         }
-        return null;
+        catch (InvalidAssemblyException e)
+        {
+            e.attachData("Current Line: " + line, assembly);
+            throw e;
+        }
+        catch (Exception e)
+        {
+            InvalidAssemblyException wrapper = new InvalidAssemblyException("Unknown exception occurred during parsing", e);
+            wrapper.attachData("Current Line: " + line, assembly);
+            throw wrapper;
+        }
     }
 }

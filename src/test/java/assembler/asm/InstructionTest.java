@@ -1,4 +1,4 @@
-package assembler.code;
+package assembler.asm;
 
 import assembler.util.InvalidAssemblyException;
 import org.jetbrains.annotations.TestOnly;
@@ -56,6 +56,6 @@ class InstructionTest
         {
             fail("Instruction type is null");
         }
-        return new Instruction(type, input.split("#")[0].replaceAll(" *", "").split(",")).getEncodedString();
+        return new Instruction(type, 0, input, input.split("#")[0].replaceAll(" *", "").split(",")).getEncodedString();
     }
 }

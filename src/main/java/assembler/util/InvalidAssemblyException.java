@@ -6,8 +6,13 @@
 
 package assembler.util;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class InvalidAssemblyException extends Exception
 {
+    private String extraData = "";
+
     public InvalidAssemblyException(String message, Throwable cause)
     {
         super(message, cause);
@@ -16,5 +21,15 @@ public class InvalidAssemblyException extends Exception
     public InvalidAssemblyException(String message)
     {
         super(message);
+    }
+
+    public void attachData(Object... args)
+    {
+        extraData += Arrays.stream(args).map(Object::toString).collect(Collectors.joining("\n"));
+    }
+
+    public void printData()
+    {
+        System.out.println("Extra Debug Data:\n" + extraData);
     }
 }

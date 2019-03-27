@@ -4,7 +4,7 @@
  * See the project LICENCE.md for more information
  */
 
-package assembler.code;
+package assembler.asm;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,8 +17,12 @@ public enum InstructionTemplate
 {
     MOV("mov"),
     MOVI("movi"),
-    MOVI_LONG("movil"),
-    SUBI("subi");
+    MOVI_LONG("movia"),
+    SUBI("subi"),
+    BREAK_GREATER_EQUAL("bge"),
+    BREAK_LESS_EQUAL("ble"),
+    BREAK_ZERO("brz"),
+    BREAK_NOT_ZERO("bnz");
 
     private static final HashMap<String, InstructionTemplate> TEMPLATES;
 
@@ -62,10 +66,29 @@ public enum InstructionTemplate
             case MOVI:
                 return List.of("addi " + args[0] + ",r0," + args[1]);
             case MOVI_LONG:
-                // todo: all of this
-                throw new UnsupportedOperationException("Not implemented yet!");
+                try
+                {
+                    int result = Integer.parseInt(args[1]);
+                    return List.of("ori " + args[0] + ",r0," + ((result >> 6) & 0b111111),
+                            "lsi " + args[0] + "," + args[0] + ",6",
+                            "ori " + args[0] + "," + args[0] + "," + (result & 0b111111));
+                }
+                catch (NumberFormatException e)
+                {
+                    return List.of("ori " + args[0] + ",r0,[11-6]" + args[1],
+                            "lsi " + args[0] + "," + args[0] + ",6",
+                            "ori " + args[0] + "," + args[0] + ",[5-0]" + args[1]);
+                }
             case SUBI:
                 return List.of("addi " + args[0] + "," + args[1] + ",-" + args[2]);
+            case BREAK_GREATER_EQUAL:
+                return List.of("blt " + args[1] + "," + args[0] + "," + args[2]);
+            case BREAK_LESS_EQUAL:
+                return List.of("bgt " + args[1] + "," + args[0] + "," + args[2]);
+            case BREAK_ZERO:
+                return List.of("beq " + args[0] + ",r0," + args[1]);
+            case BREAK_NOT_ZERO:
+                return List.of("bne " + args[0] + ",r0," + args[1]);
             default:
                 throw new UnsupportedOperationException("Not implemented!");
         }

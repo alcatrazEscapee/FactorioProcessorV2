@@ -4,7 +4,7 @@
  * See the project LICENCE.md for more information
  */
 
-package assembler.code;
+package assembler.asm;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -12,13 +12,15 @@ public interface IInstruction
 {
     int getEncoded();
 
+    int getLine();
+
     @Nullable
     default String getSymbol()
     {
         return null;
     }
 
-    default void setSymbol(int symbolValue) {}
+    default void setSymbol(int symbolLine) {}
 
     default String getEncodedString()
     {

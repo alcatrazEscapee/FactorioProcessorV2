@@ -6,7 +6,10 @@
 
 package assembler.util;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,7 +45,7 @@ public final class Helpers
         InputStream input = Helpers.class.getClassLoader().getResourceAsStream(fileName);
         if (input == null)
         {
-            throw new Error("Resource '" + fileName + "' not found.");
+            throw new Error("Resource '" + fileName + "' not found. This is a bug!");
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(input)))
         {
@@ -50,22 +53,8 @@ public final class Helpers
         }
         catch (IOException e)
         {
-            throw new Error("Resource '" + fileName + "' not found.");
+            throw new Error("Resource '" + fileName + "' not found. This is a bug!", e);
         }
-    }
-
-    public static boolean saveFile(String fileName, String fileData)
-    {
-        Path filePath = Paths.get(fileName);
-        try (BufferedWriter writer = Files.newBufferedWriter(filePath))
-        {
-            writer.write(fileData);
-        }
-        catch (IOException e)
-        {
-            return false;
-        }
-        return true;
     }
 
     public static List<String> getLinesUnformatted(String input)
