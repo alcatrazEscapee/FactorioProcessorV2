@@ -27,6 +27,13 @@ Example Usage:
 java -jar factoriocompiler.jar -d --file path/to/assembly_code.s --blueprint
 ```
 
+The Assembly syntax is very similar to the style of the [Nios-II DE0](https://www.intel.com/content/dam/www/programmable/us/en/pdfs/literature/hb/nios2/n2cpu_nii51017.pdf) assembly. Each instruction is a single line, with a keyword identifying the instruction, followed by comma separated arguments. Arguments can be registers (`r0`, `r1`, `r2`... `r7`, `ra`, `sp`), labels (`br loop`), or immediate values (signed decimal, hex, octal, or binary digits)
+
+There are also a few additional assembler macros:
+
+ - `[LABEL:] .asciz Some Text`: This will compile "Some Text" to ASCII codes and insert them into ROM directly following the program data. The addition of the label will allow you to refer to the string pointer via the name of the label
+  - `.malloc LABEL, amount`: This will "allocate" a certain amount of memory to the processor, and assign the label to the start of that section of memory. Note there are no checks on memory allocation except for allocating more than the processor has to start with. Programs will have to manage their own memory, as such this is more of a macro used to get a label for a memory location. 
+
 ---
 ##### Documentation / Processor Specifications
 

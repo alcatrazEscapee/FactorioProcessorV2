@@ -23,7 +23,9 @@ public enum InstructionTemplate
     BREAK_GREATER_EQUAL("bge"),
     BREAK_LESS_EQUAL("ble"),
     BREAK_ZERO("brz"),
-    BREAK_NOT_ZERO("bnz");
+    BREAK_NOT_ZERO("bnz"),
+    BREAK("br"),
+    NOOP("nop");
 
     private static final HashMap<String, InstructionTemplate> TEMPLATES;
 
@@ -92,6 +94,10 @@ public enum InstructionTemplate
                 return List.of("beq " + args[0] + ",r0," + args[1]);
             case BREAK_NOT_ZERO:
                 return List.of("bne " + args[0] + ",r0," + args[1]);
+            case BREAK:
+                return List.of("beq r0, r0, " + args[0]);
+            case NOOP:
+                return List.of("add r0, r0, r0");
             default:
                 throw new UnsupportedOperationException("Not implemented!");
         }

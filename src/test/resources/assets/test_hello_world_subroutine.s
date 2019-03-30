@@ -1,7 +1,7 @@
 # Main Program
     # The assembly is built to use two special registers: ra and sp
-    # ra is the return address - it is an alias for r1
-    # sp is the stack pointer - it is an alias for r7
+    # ra is the return address - it is aliased to r1
+    # sp is the stack pointer - it is aliased to r7
     # The stack pointer is used to track subroutine calls and save registers to RAM.
 
     movia sp, 319           # init stack pointer to the last RAM location
@@ -18,7 +18,7 @@
 
 # Subroutine. Prints a string to the output
 # r2 = pointer to a string
-# r3 = base output offset
+# r3 = offset for start of string (in the range [0, 15])
 PrintString:
     subi sp, sp, 3          # stack positions for 3 words
     stw r2, 0(sp)           # store r2

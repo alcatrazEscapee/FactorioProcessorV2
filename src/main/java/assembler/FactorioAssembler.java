@@ -170,38 +170,40 @@ public final class FactorioAssembler
                     return null;
                 }
 
-                if (inputBuilder.length() > 0)
+                if (InstructionType.keys().contains(keyword) && Helpers.isNextNonAlphanumeric(inputBuilder))
                 {
-                    if (InstructionType.keys().contains(keyword) && inputBuilder.charAt(0) == ' ')
-                    {
-                        // basic instruction
-                        assembly.addInstruction(keyword, keyword + inputBuilder, args);
-                        return null;
-                    }
-                    else if (InstructionTemplate.keys().contains(keyword) && inputBuilder.charAt(0) == ' ')
-                    {
-                        // template instruction
-                        return InstructionTemplate.get(keyword).convert(args);
-                    }
-                    else if (".asciz".equals(keyword) && inputBuilder.charAt(0) == ' ')
-                    {
-                        inputBuilder.deleteCharAt(0);
-                        assembly.addData(inputBuilder.toString().toUpperCase());
-                        return null;
-                    }
-                    else if (inputBuilder.charAt(0) == ':')
-                    {
-                        // labels
-                        assembly.addLabel(keyword);
-                        inputBuilder.deleteCharAt(0);
-                        keywordBuilder = new StringBuilder();
-                    }
+                    // basic instruction
+                    assembly.addInstruction(keyword, keyword + inputBuilder, args);
+                    return null;
+                }
+                else if (InstructionTemplate.keys().contains(keyword) && Helpers.isNextNonAlphanumeric(inputBuilder))
+                {
+                    // template instruction
+                    return InstructionTemplate.get(keyword).convert(args);
+                }
+                else if (".asciz".equals(keyword) && Helpers.isNextNonAlphanumeric(inputBuilder))
+                {
+                    inputBuilder.deleteCharAt(0);
+                    assembly.addData(inputBuilder.toString().toUpperCase());
+                    return null;
+                }
+                else if (".malloc".equals(keyword) && Helpers.isNextNonAlphanumeric(inputBuilder))
+                {
+                    assembly.addMemory(args);
+                    return null;
+                }
+                else if (inputBuilder.length() > 0 && inputBuilder.charAt(0) == ':')
+                {
+                    // labels
+                    assembly.addLabel(keyword);
+                    inputBuilder.deleteCharAt(0);
+                    keywordBuilder = new StringBuilder();
                 }
             }
 
             if (keywordBuilder.length() > 0)
             {
-                System.out.println("Unable to parse: " + keywordBuilder);
+                throw new InvalidAssemblyException("Unknown instruction: " + keywordBuilder);
             }
             return null;
         }
