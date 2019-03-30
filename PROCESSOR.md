@@ -34,28 +34,30 @@
  - Initial Memory: 256 Byte ROM, 256 Byte RAM
  - Instruction Set to focus on ALU operations (with combinator logic) over immediate values
  - Support for Memory-based peripherals such as I/O, Factory Control, or Display
- - 2 Hz Clock / 2.5 s per instruction
+ - 3.75 Hz Clock / 1.3 s per instruction
 
 ##### 1.2 Register File
  - General Purpose Registers r0 - r7
  - 3-Bit Addressable
  - Dual Ported, Single Memory Design
  - r0 = Zero Register
- - r1 = Link Register
- - r2-r7 = General Purpose Registers
+ - r1 = ra = Link Register
+ - r7 = sp = Stack Pointer
+ - r2-r6 = General Purpose Registers
 
 ##### 1.3 ALU
- - Support for all native factorio combinator operations
- - Additional "compound" operations (rotate?)
- - Comparison operators (1 if true, 0 if false)
+ - Support for all native factorio combinator operations, including operations not typical on a RISC style architecture (modulo, power, etc.)
+ - Additional "compound" operations (rotate, xnor, etc.)
+ - Operations done on 32-Bit signals, which have been sign extended from 16 bits
 
 ##### 1.4 Memory
  - 512 Byte / 256 Word ROM (Read Only Memory)
  - Implemented as constant combinators - used for program storage
- - Word-Addressable - locations 0 - 512
+ - Word-Addressable - locations 0 - 255
  - 128 Byte / 64 Word RAM (Random Access Memory)
  - Implemented as chained 8x16-Bit SR-Latch Units
- - Word-Addressable - locations 512 - 4096
+ - Word-Addressable - locations 256 - 320
+ - Assembler Macros: `LAST_RAM_WORD` = 320
 
 ##### 1.5 Instruction Set
  - Basic 16-Bit RISC Style Instruction Set.
@@ -70,6 +72,7 @@
  - Memory operations
  - L-Type: `[11b - IMM][5b - OP]`
  - Call / Return Instructions
+ - Special `exit` instruction (asynchronous)
  
 ##### 1.6 Operation Instructions
  - The Main controller (clock generator / SR-running latch) has a few lights to represent the current state of the processor. In order from left to right (each 2 lights = 1 signal) these are:
@@ -172,12 +175,15 @@ Break If Greater or Equal  | bge      | rX, rY, LABEL | blt rY, rX, LABEL
 Break If Less or Equal     | ble      | rX, rY, LABEL | bgt rY, rX, LABEL
 Break If Zero              | brz      | rX, LABEL     | beq rX, r0, LABEL
 Break If Not Zero          | bnz      | rX, LABEL     | bne rX, r0, LABEL
+Break Unconditional        | br       | LABEL         | beq r0, r0, LABEL
+No-op                      | nop      |               | add r0, r0, r0
 
 \* The `exit` instruction shares an opcode with `return`. It is given by the encoding 1000000000010000. This instruction will stop the processor's clock and terminate program execution. 
 
 Additionally, the compiler will recognize directives that start with a `.`:
 
-* `.asciz [some raw text]`: This will insert a null-terminated string into the program ROM data. See the provided hello world program for example usage.
+ - `.asciz [some raw text]`: This will insert a null-terminated string into the program ROM data. See the provided hello world program for example usage.
+ - `.malloc [LABEL] [amount]`: Tracks a memory amount, and assigns the label to the beginning of the memory in RAM.
 
 
 ##### 2.3 Instruction Types
@@ -278,7 +284,7 @@ TYPE 5 / 6:
  - Steps labeled as: 1, 2, 3, 4, 5
  - STEP 1: Instruction Fetch, IR Load, PC Load
  - STEP 2: IR Decode, RA, RB Load
- - STEP 3: ALU Operation, RZ Load, RM Load
+ - STEP 3: ALU Operation, RZ Load
  - STEP 4: Memory Fetch, RY Load or PC Load
  - STEP 5: RF Load
  - Clock is done with a counter from 0 to 16
@@ -286,9 +292,13 @@ TYPE 5 / 6:
  - My laptop (32 MB / i7-8850U / 2.6 GHz) can run with 32x speed (120 Hz, or 0.041s / instruction)
 
 ##### 3.2 Internal Structure
- - RA, RB, RY, RZ, RM implemented as 16-Bit D-FF with CLR
+ - RA, RB, RY, RZ implemented as 16-Bit D-FF with CLR
  - IR, PC, 16-Bit D-FF with CLR, LE
  - Other Units: RF, ALU, PC-IAG, RB-Mux, RY-Mux, PMI
+ - ROM: Constant Combinator based ROM (4x blocks with 4 rows of 32-Bytes each)
+ - RAM: SR-Latch blocks (4x blocks of 16-Bytes each)
+ - Input: Full ASCII Keyboard + Input Buffer D-FF
+ - Output: 16-Character Display with 1x 32-Byte RAM block
 
 ---
 ### 4. Implementation
