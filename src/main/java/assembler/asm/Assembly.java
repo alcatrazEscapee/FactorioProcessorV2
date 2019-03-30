@@ -23,6 +23,7 @@ public class Assembly
     private final List<IInstruction> lines;
     private final Map<String, Integer> symbolTable;
     private int currentLine;
+    private int currentMemoryLoc;
 
     public Assembly(String name)
     {
@@ -30,6 +31,12 @@ public class Assembly
         this.lines = new ArrayList<>();
         this.symbolTable = new HashMap<>();
         this.currentLine = 0;
+        this.currentMemoryLoc = 0;
+
+        // Init basic symbols
+        symbolTable.put("LAST_RAM_LOC", 319);
+        symbolTable.put("CHAR_OUT_LOC", 320);
+        symbolTable.put("CHAR_IN_LOC", 336);
     }
 
     public void addData(@NotNull String dataString)
@@ -38,13 +45,21 @@ public class Assembly
         addData((byte) 0);
     }
 
-    public void addData(@NotNull byte... dataValues)
+    public void addMemory(@NotNull String[] args) throws InvalidAssemblyException
     {
-        for (int val : dataValues)
+        int amount = Integer.valueOf(args[1]);
+        if (amount + currentMemoryLoc > 64)
         {
-            lines.add(new InstructionRaw(val, currentLine, "asciz"));
-            currentLine++;
+            throw new InvalidAssemblyException("Memory overflow! Too much memory allocated.");
         }
+        if (amount <= 0)
+        {
+            throw new InvalidAssemblyException("Can't allocate a non-positive amount of memory.");
+        }
+        // Add the label for the memory location
+        symbolTable.put(args[0], currentMemoryLoc + 256);
+        // Increment the current memory counter
+        currentMemoryLoc += amount;
     }
 
     public void addInstruction(@NotNull String name, @NotNull String text, @NotNull String[] args) throws InvalidAssemblyException
@@ -63,25 +78,24 @@ public class Assembly
         addInstruction(new InstructionRaw(0b1000000000010000, currentLine, "exit"));
     }
 
-    public void addInstruction(@NotNull IInstruction instruction)
+    @Override
+    public String toString()
     {
-        String symbol = instruction.getSymbol();
-        if (symbol != null)
-        {
-            int value = symbolTable.getOrDefault(symbol, -1);
-            if (value != -1)
-            {
-                instruction.setSymbol(value);
-            }
-        }
-
-        lines.add(instruction);
-        currentLine++;
+        return String.format("Name: %s\nLines:\n%s\nSymbols:\n%s\nMemory: %d / 64\n", name, lines.stream().map(x -> String.format("%3d | %16s | %5d | %s", x.getLine(), x.getEncodedString(), x.getEncoded(), x.toString())).collect(Collectors.joining("\n")), symbolTable, currentMemoryLoc);
     }
 
     public void addLabel(@NotNull String label)
     {
         symbolTable.put(label, currentLine);
+    }
+
+    private void addData(@NotNull byte... dataValues)
+    {
+        for (int val : dataValues)
+        {
+            lines.add(new InstructionRaw(val, currentLine, "asciz"));
+            currentLine++;
+        }
     }
 
     public void applyLinker() throws InvalidAssemblyException
@@ -131,9 +145,19 @@ public class Assembly
         return line >= lines.size() ? null : lines.get(line);
     }
 
-    @Override
-    public String toString()
+    private void addInstruction(@NotNull IInstruction instruction)
     {
-        return String.format("Name: %s\nLines:\n%s\nSymbols:\n%s\n", name, lines.stream().map(x -> String.format("%3d | %16s | %5d | %s", x.getLine(), x.getEncodedString(), x.getEncoded(), x.toString())).collect(Collectors.joining("\n")), symbolTable);
+        String symbol = instruction.getSymbol();
+        if (symbol != null)
+        {
+            int value = symbolTable.getOrDefault(symbol, -1);
+            if (value != -1)
+            {
+                instruction.setSymbol(value);
+            }
+        }
+
+        lines.add(instruction);
+        currentLine++;
     }
 }

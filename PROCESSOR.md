@@ -2,27 +2,28 @@
 
 ### Contents
 
-1. Basic Specifications
+1. [Basic Specifications](#1-basic-specifications)
    - 1.1 Guidelines
    - 1.2 Register File
    - 1.3 ALU
    - 1.4 Memory
    - 1.5 Instruction Set
    - 1.6 Operation Instructions
-2. Instruction Specifications
+2. [Instruction Specifications](#2-instruction-specifications)
    - 2.1 Instruction Table
    - 2.2 Assembler Pseudo-Instructions
    - 2.3 Instruction Types
-3. Processor Specifications
+3. [Processor Specifications](#3-processor-specifications)
    - 3.1 Clock and Step Outline
    - 3.2 Other Structures
-4. Implementation
+4. [Implementation](#4-implementation)
    - 4.1 IR Decoding Signals
    - 4.2 Main Bus Signals
    - 4.3 Internal Memory Signals
    - 4.4 Control Signal Generator
-5. Peripherals
+5. [Peripherals](#5-peripherals)
    - 5.1 16-Character ASCII Display
+   - 5.2 ASCII Keyboard and Input Buffer
 
 ---
 ### 1. Basic Specifications
@@ -455,5 +456,48 @@ Control `J`: (ALU Operation Select, 16+ choices)
  - Currently supported characters are 0-9, A-Z, and some punctuation. Relevant ASCII codes are 33 - 90 (inclusive)
  - Note only uppercase ASCII character codes are supported. The assembly compiler will automatically convert all input text to uppercase.
  - The encoded display pattern is then expanded into 25 signals A through Y, which are used as the control inputs for each lamp
- - The base memory location for the display is 320, and it occupies the next 16 spots, one for each character location
+ - The base memory location for the display is 320 (in the assembly, `CHAR_OUT_LOC`), and it occupies the next 16 spots, one for each character location
+ - The memory is constructed from a slightly modified 32-Byte RAM block - very similar to the four blocks used in processor RAM.
  - Writing to this location with a valid ASCII character code will 'print' that character to the screen.
+
+
+##### 5.2 ASCII Keyboard and Input Buffer
+ - The keyboard is a QWERTY Keyboard layout, with 25x25 pixel displays for each character. Characters are triggered by the activation of a constant combinator under the key display, which causes the key in question to turn green.
+ - The keyboard has a shift key, which works as intended, including adjusting the display to the alternate keys
+ - All supported ASCII codes by the display are able to be inputted via the keyboard.
+ - The keyboard includes an enter key, useful for program control when letting the user input strings.
+ - The keyboard can store one character to the input buffer at a time. Each key press counts as a single character. All keys must be fully released before the buffer can accept a new key press.
+ - The key buffer occupies memory slot 336 (in the assembly, `CHAR_IN_LOC`). Reading this location will get the current key held, and also clear the buffer. If there is no key, it will return zero.
+
+
+The keyboard and buffer operate based on a synchronous Finite State Machine, which is linked to the processor clock signal. The FSM has four states, which are stored in the left D-FF, and an additional D-FF which stores the current key.
+
+FSM Specifications:
+
+ - State 0: Reset
+     - This state is the default state when `R` is low
+     - It unconditionally leads to state 1
+ - State 1: Wait for Key Press
+     - If `I > 0`: (key data is asserted): goto state 2
+     - If `I = 0`: stay in state 1
+ - State 2: Store Key
+     - If `I = 0`: (key press was too quick): goto state 1
+     - Else, goto state 3
+     - Output: Key buffer Load Enable is asserted, and the `D` input is set to `I`
+ - State 3: Wait + Read Key
+     - If `E = 1` (read asserted by processor): goto state 4
+     - If `E = 0`: stay in state 3
+     - Output: Key buffer Load Enable is asserted, and the `D` input is set to zero.
+     - Output if `E = 1`: `O` is set to the output of the key buffer
+ - State 4: Wait for Key Release
+     - If `I = 0`: goto state 1
+     - If `I > 0`: stay in state 4
+     
+
+Internal Key Buffer Signals:
+ - `K`: Global Clock Signal
+ - `R`: Global Reset Signal
+ - `Q`: Current FSM State
+ - `E`: Read Signal
+ - `I`: Key Data Input (from keyboard)
+ - `O`: Key Data Output (sent to processor)

@@ -8,6 +8,7 @@ package assembler.asm;
 
 import java.util.function.IntUnaryOperator;
 
+import assembler.util.Helpers;
 import assembler.util.InvalidAssemblyException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -104,17 +105,9 @@ public class Instruction implements IInstruction
 
     private int imm6Sign(@NotNull String arg) throws InvalidAssemblyException
     {
-        boolean negative = false;
-        if (arg.startsWith("-"))
-        {
-            // Negative
-            negative = true;
-            arg = arg.substring(1);
-        }
-        int result;
         try
         {
-            result = Integer.parseInt(arg);
+            return Helpers.parseImmediate(arg, 6, true);
         }
         catch (NumberFormatException e)
         {
@@ -123,23 +116,13 @@ public class Instruction implements IInstruction
             parseSymbol(arg);
             return 0;
         }
-        if (negative)
-        {
-            result = ~result + 1;
-        }
-        if ((negative && (result & 0b100000) == 0) || (!negative && (result & 0b100000) != 0))
-        {
-            throw new InvalidAssemblyException("Immediate larger than 6-bits");
-        }
-        return result & 0b111111;
     }
 
     private int imm6Logical(@NotNull String arg) throws InvalidAssemblyException
     {
-        int result;
         try
         {
-            result = Integer.parseInt(arg);
+            return Helpers.parseImmediate(arg, 6, false);
         }
         catch (NumberFormatException e)
         {
@@ -148,29 +131,33 @@ public class Instruction implements IInstruction
             parseSymbol(arg);
             return 0;
         }
-        if ((result & 0b111111) != result)
-        {
-            throw new InvalidAssemblyException("Logical Immediate larger than 6-bits");
-        }
-        return result;
     }
 
     private int reg(@NotNull String arg) throws InvalidAssemblyException
     {
-        if ("ra".equals(arg))
+        switch (arg)
         {
-            return 1;
+            case "r0":
+                return 0;
+            case "r1":
+            case "ra":
+                return 1;
+            case "r2":
+                return 2;
+            case "r3":
+                return 3;
+            case "r4":
+                return 4;
+            case "r5":
+                return 5;
+            case "r6":
+                return 6;
+            case "r7":
+            case "sp":
+                return 7;
+            default:
+                throw new InvalidAssemblyException("Invalid register: " + arg);
         }
-        if ("sp".equals(arg))
-        {
-            return 7;
-        }
-        int result = Integer.parseInt(arg.substring(1));
-        if (result < 0 || result > 7)
-        {
-            throw new InvalidAssemblyException("Invalid Register");
-        }
-        return result;
     }
 
     private void parseSymbol(String symbol)
