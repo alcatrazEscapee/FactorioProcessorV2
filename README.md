@@ -8,12 +8,16 @@ This is a repository for a processor I built in Factorio. It is a 3.75 Hz*, 16-B
 ![Splash Image](splash_image.jpg)
 
 ---
-
 ##### World Download
 
-A world download containing the full processor, including various blueprints used in construction, and example programs can be found under /world/
+A world download containing the full processor, including various blueprints used in construction, and example programs can be found [here](world/Processor%20V2%20Final.zip).
 
+---
+##### Demonstration Video
 
+You can see a working demonstration of the processor [here](processor_demo.mp4). The processor is running the program found under `/src/test/resources/test_input_output.s`, at 32x normal game speed.
+
+---
 ##### Assembly Compiler
 
 In order to use the compiler, you need to know how to run java via command line:
@@ -44,4 +48,6 @@ There are also a few additional assembler macros:
 ##### Documentation / Processor Specifications
 
 The full processor specifications can be found [here](PROCESSOR.md). This includes documentation on the instruction set (if you want to write example programs), the inner signals of the processor, and also descriptions of my methodology, the design elements including RTN descriptions of the various instructions, and outlines of the components involved.
+
+In some places this processor is referred to as "V2". The original design and implementation of this processor failed to work out due to a badly designed instruction set, lack or organization and a general failure to do much of anything at all. This is the second iteration on this design and concept.
  
