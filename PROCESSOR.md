@@ -3,27 +3,24 @@
 ### Contents
 
 1. [Basic Specifications](#1-basic-specifications)
-   - 1.1 Guidelines
-   - 1.2 Register File
-   - 1.3 ALU
-   - 1.4 Memory
-   - 1.5 Instruction Set
-   - 1.6 Operation Instructions
+   - [1.1 Guidelines](#11-guidelines)
+   - [1.2 Register File](#12-register-file)
+   - [1.3 ALU](#13-alu)
+   - [1.4 Memory Structures](#14-memory-structures)
+   - [1.5 Instruction Set](#15-instruction-set)
+   - [1.6 Processor Indicator Flags](#16-processor-indicator-flags)
 2. [Instruction Specifications](#2-instruction-specifications)
-   - 2.1 Instruction Table
-   - 2.2 Assembler Pseudo-Instructions
-   - 2.3 Instruction Types
-3. [Processor Specifications](#3-processor-specifications)
-   - 3.1 Clock and Step Outline
-   - 3.2 Other Structures
-4. [Implementation](#4-implementation)
-   - 4.1 IR Decoding Signals
-   - 4.2 Main Bus Signals
-   - 4.3 Internal Memory Signals
-   - 4.4 Control Signal Generator
-5. [Peripherals](#5-peripherals)
-   - 5.1 16-Character ASCII Display
-   - 5.2 ASCII Keyboard and Input Buffer
+   - [2.1 Instruction Table](#21-instruction-table)
+   - [2.2 Assembler Pseudo-Instructions](#22-assembler-pseudo-instructions)
+   - [2.3 Instruction Types](#23-instruction-types)
+3. [Implementation](#3-implementation)
+   - [3.1 IR Decoding Signals](#31-ir-decoding-signals)
+   - [3.2 Main Bus Signals](#32-main-bus-signals)
+   - [3.3 Internal Memory Signals](#33-internal-memory-signals)
+   - [3.4 Control Signal Generator](#34-control-signal-generator)
+4. [Peripherals](#4-peripherals)
+   - [4.1 16-Character ASCII Display](#41-16-character-ascii-display)
+   - [4.2 ASCII Keyboard and Input Buffer](#42-ascii-keyboard-and-input-buffer)
 
 ---
 ### 1. Basic Specifications
@@ -44,20 +41,28 @@
  - r1 = ra = Link Register
  - r7 = sp = Stack Pointer
  - r2-r6 = General Purpose Registers
+ - Internal Registers RA, RB, RY, RZ implemented as 16-Bit D-FF with CLR
+ - Internal Registers IR, PC, implemented as 16-Bit D-FF with CLR, LE
 
 ##### 1.3 ALU
  - Support for all native factorio combinator operations, including operations not typical on a RISC style architecture (modulo, power, etc.)
  - Additional "compound" operations (rotate, xnor, etc.)
- - Operations done on 32-Bit signals, which have been sign extended from 16 bits
+ - All ALU operations are signed (done on 32-bit signed integers, since that is factorio's native combinator values)
+ - High 16-bits are truncated (`AND 0xFFFF`), resulting in storage of 16-bit positive integers
 
-##### 1.4 Memory
+##### 1.4 Memory Structures
  - 512 Byte / 256 Word ROM (Read Only Memory)
- - Implemented as constant combinators - used for program storage
+ - Constant Combinator based design
+ - Blueprint-able (for easy program loading)
+ - Structure: 4x blocks of 128-bytes (4x16 rows/cols, 32-Bytes / constant combinator)
  - Word-Addressable - locations 0 - 255
  - 128 Byte / 64 Word RAM (Random Access Memory)
  - Implemented as chained 8x16-Bit SR-Latch Units
+ - Structure: 4x blocks of 16-bytes (2x8 rows/cols)
  - Word-Addressable - locations 256 - 320
  - Assembler Macros: `LAST_RAM_WORD` = 320
+ - Input: Full ASCII Keyboard + Input Buffer D-FF
+ - Output: 16-Character Display with 1x 32-Byte RAM block
 
 ##### 1.5 Instruction Set
  - Basic 16-Bit RISC Style Instruction Set.
@@ -74,7 +79,7 @@
  - Call / Return Instructions
  - Special `exit` instruction (asynchronous)
  
-##### 1.6 Operation Instructions
+##### 1.6 Processor Indicator Flags
  - The Main controller (clock generator / SR-running latch) has a few lights to represent the current state of the processor. In order from left to right (each 2 lights = 1 signal) these are:
 
 Exit Flag:
@@ -121,7 +126,7 @@ Extra Info:
 ---
 ### 2. Instruction Specifications
 
-2.1 Instruction Table
+#####2.1 Instruction Table
 
  - Note that most of these instructions are very similar if not identical in assembly usage to the Nios-II DE0 instruction set, which I used as a template and inspiration for this instruction set. (Although the implementation of the instruction set and the overall processor is quite different.)
  - All immediate values (denoted with IMM, 6b-IMM, or 12b-IMM) represent immediate values. The exception is the `movia` pseudoinstruction, which can take a label or a 12 bit signed immediate value (range \[-1024, 1023])
@@ -162,7 +167,7 @@ Opcode      | Name                 | Assembly  | Fields        | ID    | Type
 1111        | Right Shift Immediate| rsi       | rX, rY, IMM   | 31    | 6
 
 
-2.2: Assembler / Compiler Pseudo-Instructions:
+##### 2.2: Assembler Pseudo-Instructions:
 
 Name                       | Assembly | Fields        | Actual Implementation
 ---------------------------|----------|---------------|-------------------------
@@ -219,9 +224,19 @@ Additionally, the compiler will recognize directives that start with a `.`:
 
 
 ##### 2.4 Instruction RTN
+ - RISC Style Architecture with 5 Distinct Steps
+ - Step Counter implemented as a single 16-Bit D-FF with CLR, LE
+ - Steps labeled as: 1, 2, 3, 4, 5
+ - STEP 1: Instruction Fetch, IR Load, PC Load
+ - STEP 2: IR Decode, RA, RB Load
+ - STEP 3: ALU Operation, RZ Load
+ - STEP 4: Memory Fetch, RY Load or PC Load
+ - STEP 5: RF Load
+ - Clock is done with a counter from 0 to 16
+ - Updates happen every game tick, so speed is 3.75 Hz (at 60 UPS)
  - All Instructions have a common first step:
  - STEP 1: `PC <- [PC] + 1`, Memory Read (Address `[PC]`), `[IR] <- Memory Data`
- - Some control signals are implicit, i.e. `RA <- [r0]` since that requires a RF-A-ID of 0, or default
+ - Some control signals are implicit, i.e. `RA <- [r0]` since that requires a RF-A-ID of 0, which translates to no signal asserted (since factorio value `0` == no signal)
  - These are important (they must be asserted) but require no specific logic to implement
  - Registers that don't have load enable (i.e. RY, RZ, RM) are still denoted in RTN if they experience change
 
@@ -274,36 +289,11 @@ TYPE 5 / 6:
  - STEP 3: ALU op, `RZ <- ALU Result`
  - STEP 4: `RY <- [RZ]`
  - STEP 5: `rD <- [RY]`
-
+ 
 ---
-### 3. Processor Specifications
+### 3. Implementation
 
-##### 3.1 Clock and Step Outline
- - 5 Distinct Steps
- - Step Counter as a single 16-Bit D-FF with CLR
- - Steps labeled as: 1, 2, 3, 4, 5
- - STEP 1: Instruction Fetch, IR Load, PC Load
- - STEP 2: IR Decode, RA, RB Load
- - STEP 3: ALU Operation, RZ Load
- - STEP 4: Memory Fetch, RY Load or PC Load
- - STEP 5: RF Load
- - Clock is done with a counter from 0 to 16
- - Updates happen every game tick, so speed is 3.75 Hz (at 60 UPS)
- - My laptop (32 MB / i7-8850U / 2.6 GHz) can run with 32x speed (120 Hz, or 0.041s / instruction)
-
-##### 3.2 Internal Structure
- - RA, RB, RY, RZ implemented as 16-Bit D-FF with CLR
- - IR, PC, 16-Bit D-FF with CLR, LE
- - Other Units: RF, ALU, PC-IAG, RB-Mux, RY-Mux, PMI
- - ROM: Constant Combinator based ROM (4x blocks with 4 rows of 32-Bytes each)
- - RAM: SR-Latch blocks (4x blocks of 16-Bytes each)
- - Input: Full ASCII Keyboard + Input Buffer D-FF
- - Output: 16-Character Display with 1x 32-Byte RAM block
-
----
-### 4. Implementation
-
-##### 4.1 IR Decoding Signals
+##### 3.1 IR Decoding Signals
  - Instructions are encoded via one of the following patterns, MBS to LSB Left to Right:
  - R-Type: `[3b - RD][3b - RS][3b - RT][7b - OP]`
  - C-Type: `[3b - RD][3b - RS][6b - IMM][4b - OP]`
@@ -323,7 +313,7 @@ Output:
  - `6` - 6-Bit Imm, Logical Extend
 
 
-##### 4.2 Main Bus Signals
+##### 3.2 Main Bus Signals
 
 **DATA (RED)**
  - `A` - RA Output
@@ -358,7 +348,7 @@ Output:
  - `S` - Step Counter Value
 
 
-##### 4.3 Internal Memory Signals
+##### 3.3 Internal Memory Signals
 
 **DATA (RED)**
  - `S` - Memory Address
@@ -379,7 +369,7 @@ Internal SRAM Signals:
  - `O` - Memory Value
 
 
-##### 4.4 Control Signal Generator
+##### 3.4 Control Signal Generator
  - Two control signals are asserted via external circuitry: `K` (CLK) and `R` (CLR)
  - Other control signals are asserted via combinational logic from input values
  - Input values consist of: IR output fields (`ITXYZ156`), step counter (`S`), and choice other data values (RZ)
@@ -458,9 +448,9 @@ Control `J`: (ALU Operation Select, 16+ choices)
 
 
 ---
-### 5. Peripherals
+### 4. Peripherals
 
-##### 5.1 16-Character ASCII Display
+##### 4.1 16-Character ASCII Display
  - Each character uses a 25x25 pixel area, encoded with a 25-bit binary number.
  - The font used is [Visitor](https://www.dafont.com/visitor.font), with some tweaks.
  - Currently supported characters are 0-9, A-Z, and some punctuation. Relevant ASCII codes are 33 - 90 (inclusive)
@@ -471,7 +461,7 @@ Control `J`: (ALU Operation Select, 16+ choices)
  - Writing to this location with a valid ASCII character code will 'print' that character to the screen.
 
 
-##### 5.2 ASCII Keyboard and Input Buffer
+##### 4.2 ASCII Keyboard and Input Buffer
  - The keyboard is a QWERTY Keyboard layout, with 25x25 pixel displays for each character. Characters are triggered by the activation of a constant combinator under the key display, which causes the key in question to turn green.
  - The keyboard has a shift key, which works as intended, including adjusting the display to the alternate keys
  - All supported ASCII codes by the display are able to be inputted via the keyboard.
