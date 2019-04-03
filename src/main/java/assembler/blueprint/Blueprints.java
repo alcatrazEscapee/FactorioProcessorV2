@@ -26,8 +26,8 @@ public class Blueprints
 
     static
     {
-        BLUEPRINT_128W = Helpers.loadResource("assets/128w_rom_blueprint.json").replaceAll("[\n\r\t ]+", "");
-        BLUEPRINT_256W = Helpers.loadResource("assets/256w_rom_blueprint.json").replaceAll("[\n\r\t ]+", "");
+        BLUEPRINT_128W = Helpers.loadResource("128w_rom_blueprint.json").replaceAll("[\n\r\t ]+", "");
+        BLUEPRINT_256W = Helpers.loadResource("256w_rom_blueprint.json").replaceAll("[\n\r\t ]+", "");
     }
 
     @Nullable

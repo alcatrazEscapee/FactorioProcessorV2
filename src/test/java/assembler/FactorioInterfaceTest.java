@@ -80,14 +80,14 @@ class FactorioInterfaceTest
     @Test
     void multipleData()
     {
-        FactorioAssembler.main("-l", "test", "-f", "src/test/resources/assets/test1.s");
+        FactorioAssembler.main("-l", "test", "-f", "src/test/resources/test1.s");
         assertEquals("Can't specify multiple data input sources\r\n", outContent.toString());
     }
 
     @Test
     void multipleFile()
     {
-        FactorioAssembler.main("--file", "src/test/resources/assets/test1.s", "-f", "src/test/resources/assets/test1.s");
+        FactorioAssembler.main("--file", "src/test/resources/test1.s", "-f", "src/test/resources/assets/test1.s");
         assertEquals("Can't specify multiple data input sources\r\n", outContent.toString());
     }
 }

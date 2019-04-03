@@ -1,6 +1,6 @@
 # Main Program
     # This program makes use of assembler labels
-    # These labels are configured to be the apropiate memory location for various areas in memory, or io devices
+    # These labels are configured to be the appropriate memory location for various areas in memory, or io devices
     movia   sp, LAST_RAM_LOC# init stack pointer to the last RAM location
 
     movia   r3, MSG1        # prompt string pointer
