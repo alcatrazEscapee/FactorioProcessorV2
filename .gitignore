@@ -4,7 +4,9 @@ build/
 
 # Intellij
 .idea/
+out/
 *.iml
+*.class
 
 # Git
 .git/

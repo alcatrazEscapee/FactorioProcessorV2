@@ -66,11 +66,9 @@ class FactorioAssemblerTest
         String data = Helpers.loadResource(fileName);
         try
         {
-            Assembly asm = FactorioAssembler.build("test", data);
+            Assembly asm = FactorioAssembler.build(data);
             assertEquals(expectedBytes.length, asm.size());
             assertArrayEquals(expectedBytes, asm.getInstructions().stream().mapToInt(IInstruction::getEncoded).toArray());
-
-            assertEquals("test", asm.getName());
         }
         catch (InvalidAssemblyException e)
         {

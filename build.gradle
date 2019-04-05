@@ -28,7 +28,7 @@ dependencies {
 }
 
 // Define the main class for the application
-mainClassName = 'assembler.AssemblerInterface'
+mainClassName = 'assembler.FactorioAssembler'
 
 // Task Configuration
 jar {
@@ -39,3 +39,10 @@ jar {
 test {
     useJUnitPlatform()
 }
+
+task copyJar(type: Copy) {
+    from 'build/libs/'
+    into 'downloads/'
+    exclude 'factorioassembler-all.jar'
+}
+build.finalizedBy(copyJar)

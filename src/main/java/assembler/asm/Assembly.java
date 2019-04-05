@@ -19,15 +19,13 @@ import org.jetbrains.annotations.Nullable;
 
 public class Assembly
 {
-    private final String name;
     private final List<IInstruction> lines;
     private final Map<String, Integer> symbolTable;
     private int currentLine;
     private int currentMemoryLoc;
 
-    public Assembly(String name)
+    public Assembly()
     {
-        this.name = name;
         this.lines = new ArrayList<>();
         this.symbolTable = new HashMap<>();
         this.currentLine = 0;
@@ -81,7 +79,7 @@ public class Assembly
     @Override
     public String toString()
     {
-        return String.format("Name: %s\nLines:\n%s\nSymbols:\n%s\nMemory: %d / 64\n", name, lines.stream().map(x -> String.format("%3d | %16s | %5d | %s", x.getLine(), x.getEncodedString(), x.getEncoded(), x.toString())).collect(Collectors.joining("\n")), symbolTable, currentMemoryLoc);
+        return String.format("Lines:\n%s\nSymbols:\n%s\nMemory: %d / 64\n", lines.stream().map(x -> String.format("%3d | %16s | %5d | %s", x.getLine(), x.getEncodedString(), x.getEncoded(), x.toString())).collect(Collectors.joining("\n")), symbolTable, currentMemoryLoc);
     }
 
     public void addLabel(@NotNull String label)
@@ -120,12 +118,6 @@ public class Assembly
                 }
             }
         }
-    }
-
-    @NotNull
-    public String getName()
-    {
-        return name;
     }
 
     @NotNull
