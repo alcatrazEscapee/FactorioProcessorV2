@@ -96,11 +96,11 @@ public final class FactorioAssembler
             return;
         }
 
-        System.out.printf("Compiling with arguments: [%s]\n", String.join(" ", args));
+        System.out.printf("Compiling with arguments: [\'%s\']\n", String.join("\', \'", args));
         Assembly asm;
         try
         {
-            asm = build(name, input);
+            asm = build(input);
         }
         catch (InvalidAssemblyException e)
         {
@@ -127,12 +127,14 @@ public final class FactorioAssembler
             System.out.println("Blueprint String:");
             System.out.println(blueprintString);
         }
+
+        System.out.println("Compilation Complete!");
     }
 
     @NotNull
-    public static Assembly build(@NotNull String name, @NotNull String input) throws InvalidAssemblyException
+    public static Assembly build(@NotNull String input) throws InvalidAssemblyException
     {
-        Assembly assembly = new Assembly(name);
+        Assembly assembly = new Assembly();
         List<String> inputLines = Helpers.getLinesUnformatted(input);
 
         while (inputLines.size() > 0)

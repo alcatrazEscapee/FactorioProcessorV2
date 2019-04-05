@@ -69,7 +69,6 @@ public class Blueprints
             String replacement = inst == null ? "0" : "" + inst.getEncoded();
             input = input.replaceAll("\"MEMORY_VALUE_" + i + "\"", replacement);
         }
-        input = input.replaceAll("PROGRAM_NAME", asm.getName());
 
         byte[] result, buffer = new byte[1024];
         Deflater deflater = new Deflater();
