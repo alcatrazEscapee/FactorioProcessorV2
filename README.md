@@ -10,7 +10,7 @@ This is a repository for a processor I built in Factorio. It is a 3.75 Hz*, 16-B
 ---
 ##### World Download
 
-A world download containing the full processor, including various blueprints used in construction, and example programs can be found [here](world/Processor%20V2%20Final.zip).
+A world download containing the full processor, including various blueprints used in construction, and example programs can be found [here](downloads/Processor%20V2%20Final.zip).
 
 ---
 ##### Demonstration Video
